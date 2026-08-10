@@ -180,3 +180,16 @@ export type IAdminUser = {
   isBanned: boolean;
   createdAt: string;
 };
+
+export type IAdminJob = {
+  id: string;
+  title: string;
+  location: string;
+  type: TJobType;
+  status: TJobStatus;
+  salaryMin: number;
+  salaryMax: number;
+  createdAt: string;
+  category: { name: string };
+  company: { name: string; logo?: string | null };
+};
