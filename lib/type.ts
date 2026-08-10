@@ -169,3 +169,14 @@ export type IEmployerJobDetail = {
   deadline: string;
   category: { id: string; name: string };
 };
+
+export type IAdminUser = {
+  id: string;
+  name: string;
+  email: string;
+  role: TRole;
+  profilePhoto?: string | null;
+  isVerified: boolean;
+  isBanned: boolean;
+  createdAt: string;
+};

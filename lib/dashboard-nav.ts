@@ -37,9 +37,9 @@ const employerNav: TNavItem[] = [
 
 const adminNav: TNavItem[] = [
   { title: 'Overview', href: '/admin-dashboard', icon: 'LayoutDashboard' },
-  { title: 'Manage Users', href: '/admin-dashboard/users', icon: 'Users' },
-  { title: 'Manage Jobs', href: '/admin-dashboard/jobs', icon: 'FolderKanban' },
-  { title: 'Manage Companies', href: '/admin-dashboard/companies', icon: 'Building2' },
+  { title: 'Manage Users', href: '/admin-dashboard/manage-users', icon: 'Users' },
+  { title: 'Manage Jobs', href: '/admin-dashboard/manage-jobs', icon: 'FolderKanban' },
+  { title: 'Manage Companies', href: '/admin-dashboard/manage-companies', icon: 'Building2' },
   { title: 'Analytics', href: '/admin-dashboard/analytics', icon: 'BarChart3' },
   { title: 'Settings', href: '/admin-dashboard/settings', icon: 'Settings' },
 ];
