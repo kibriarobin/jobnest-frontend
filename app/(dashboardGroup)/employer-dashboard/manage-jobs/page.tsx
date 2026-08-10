@@ -26,7 +26,7 @@ export default async function ManageJobsPage() {
           <p className="text-sm text-muted-foreground">All jobs posted by your company.</p>
         </div>
         <Button asChild>
-          <Link href="/employer-dashboard/jobs/create">
+          <Link href="/employer-dashboard/create-jobs">
             <Plus className="size-4" />
             Post a Job
           </Link>
@@ -62,7 +62,7 @@ export default async function ManageJobsPage() {
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-1">
                       <Button variant="ghost" size="icon" asChild>
-                        <Link href={`/employer-dashboard/jobs/${job.id}/edit`}>
+                        <Link href={`/employer-dashboard/manage-jobs/${job.id}/edit`}>
                           <Pencil className="size-4" />
                         </Link>
                       </Button>

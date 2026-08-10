@@ -154,3 +154,18 @@ export type IApplicantRow = {
     title: string;
   };
 };
+
+export type IEmployerJobDetail = {
+  id: string;
+  title: string;
+  description: string;
+  requirements: string[];
+  location: string;
+  type: TJobType;
+  salaryMin: number;
+  salaryMax: number;
+  experienceLevel: string;
+  vacancy: number;
+  deadline: string;
+  category: { id: string; name: string };
+};

@@ -14,13 +14,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { createJobAction, TCreateJobState } from '../_actions/create-job';
-import { ICategory } from '@/lib/type';
+import { updateJobAction, TUpdateJobState } from '../_actions/update-job';
+import { ICategory, IEmployerJobDetail } from '@/lib/type';
 
-const initialState: TCreateJobState = { success: false };
+const initialState: TUpdateJobState = { success: false };
 
-export function CreateJobForm({ categories }: { categories: ICategory[] }) {
-  const [state, formAction, isPending] = useActionState(createJobAction, initialState);
+export function EditJobForm({
+  categories,
+  job,
+}: {
+  categories: ICategory[];
+  job: IEmployerJobDetail;
+}) {
+  const boundUpdateAction = updateJobAction.bind(null, job.id);
+  const [state, formAction, isPending] = useActionState(boundUpdateAction, initialState);
+
+  const defaultDeadline = job.deadline
+    ? new Date(job.deadline).toISOString().split('T')[0]
+    : '';
 
   return (
     <Card>
@@ -35,7 +46,13 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="title">Job Title</Label>
-              <Input id="title" name="title" placeholder="Enter job title" disabled={isPending} />
+              <Input
+                id="title"
+                name="title"
+                placeholder="Enter job title"
+                defaultValue={job.title}
+                disabled={isPending}
+              />
               {state.errors?.title && (
                 <p className="text-xs text-destructive">{state.errors.title[0]}</p>
               )}
@@ -43,7 +60,7 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
 
             <div className="space-y-2">
               <Label htmlFor="categoryId">Category</Label>
-              <Select name="categoryId" disabled={isPending}>
+              <Select name="categoryId" disabled={isPending} defaultValue={job.category.id}>
                 <SelectTrigger id="categoryId">
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
@@ -68,6 +85,7 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
               name="description"
               rows={4}
               placeholder="Describe the role, responsibilities, and team..."
+              defaultValue={job.description}
               disabled={isPending}
             />
             {state.errors?.description && (
@@ -82,6 +100,7 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
               name="requirements"
               rows={4}
               placeholder={'One requirement per line, e.g.\n2+ years of React experience\nStrong TypeScript skills'}
+              defaultValue={job.requirements?.join('\n')}
               disabled={isPending}
             />
             {state.errors?.requirements && (
@@ -92,7 +111,13 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="space-y-2">
               <Label htmlFor="location">Location</Label>
-              <Input id="location" name="location" placeholder="Your office location" disabled={isPending} />
+              <Input
+                id="location"
+                name="location"
+                placeholder="Your office location"
+                defaultValue={job.location}
+                disabled={isPending}
+              />
               {state.errors?.location && (
                 <p className="text-xs text-destructive">{state.errors.location[0]}</p>
               )}
@@ -100,7 +125,7 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
 
             <div className="space-y-2">
               <Label htmlFor="type">Job Type</Label>
-              <Select name="type" disabled={isPending}>
+              <Select name="type" disabled={isPending} defaultValue={job.type}>
                 <SelectTrigger id="type">
                   <SelectValue placeholder="Select type" />
                 </SelectTrigger>
@@ -121,6 +146,7 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
                 id="experienceLevel"
                 name="experienceLevel"
                 placeholder="Mid-Level (2-4 years)"
+                defaultValue={job.experienceLevel}
                 disabled={isPending}
               />
               {state.errors?.experienceLevel && (
@@ -132,7 +158,13 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
             <div className="space-y-2">
               <Label htmlFor="salaryMin">Min Salary ($)</Label>
-              <Input id="salaryMin" name="salaryMin" type="number" placeholder="Enter min salary range" disabled={isPending} />
+              <Input
+                id="salaryMin"
+                name="salaryMin"
+                type="number"
+                defaultValue={job.salaryMin}
+                disabled={isPending}
+              />
               {state.errors?.salaryMin && (
                 <p className="text-xs text-destructive">{state.errors.salaryMin[0]}</p>
               )}
@@ -140,7 +172,13 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
 
             <div className="space-y-2">
               <Label htmlFor="salaryMax">Max Salary ($)</Label>
-              <Input id="salaryMax" name="salaryMax" type="number" placeholder="Enter max salary range" disabled={isPending} />
+              <Input
+                id="salaryMax"
+                name="salaryMax"
+                type="number"
+                defaultValue={job.salaryMax}
+                disabled={isPending}
+              />
               {state.errors?.salaryMax && (
                 <p className="text-xs text-destructive">{state.errors.salaryMax[0]}</p>
               )}
@@ -148,12 +186,24 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
 
             <div className="space-y-2">
               <Label htmlFor="vacancy">Vacancy</Label>
-              <Input id="vacancy" name="vacancy" type="number" defaultValue={1} disabled={isPending} />
+              <Input
+                id="vacancy"
+                name="vacancy"
+                type="number"
+                defaultValue={job.vacancy ?? 1}
+                disabled={isPending}
+              />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="deadline">Deadline</Label>
-              <Input id="deadline" name="deadline" type="date" disabled={isPending} />
+              <Input
+                id="deadline"
+                name="deadline"
+                type="date"
+                defaultValue={defaultDeadline}
+                disabled={isPending}
+              />
               {state.errors?.deadline && (
                 <p className="text-xs text-destructive">{state.errors.deadline[0]}</p>
               )}
@@ -164,10 +214,10 @@ export function CreateJobForm({ categories }: { categories: ICategory[] }) {
             {isPending ? (
               <>
                 <Loader2 className="mr-2 size-4 animate-spin" />
-                Posting...
+                Updating...
               </>
             ) : (
-              'Post Job'
+              'Save Changes'
             )}
           </Button>
         </form>

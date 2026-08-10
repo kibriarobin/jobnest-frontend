@@ -9,9 +9,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { updateCompanyAction } from '../_actions/update-company';
+import { TProfileState } from '@/app/(dashboardGroup)/candidate-dashboard/profile/_actions/update-basic-info';
 import { ICompanyProfile } from '@/lib/type';
 
-const initialState = { success: false };
+const initialState: TProfileState = { success: false };
 
 export function CompanyForm({ company }: { company: ICompanyProfile | null }) {
   const [state, formAction, isPending] = useActionState(updateCompanyAction, initialState);

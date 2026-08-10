@@ -1,3 +1,4 @@
+
 import { getCategories } from '@/service/getCategories';
 import { CreateJobForm } from './_components/create-job-form';
 
