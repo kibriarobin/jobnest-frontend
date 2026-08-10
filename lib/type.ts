@@ -193,3 +193,22 @@ export type IAdminJob = {
   category: { name: string };
   company: { name: string; logo?: string | null };
 };
+
+export type IAdminCompany = {
+  id: string;
+  name: string;
+  logo?: string | null;
+  description?: string | null;
+  website?: string | null;
+  isVerified: boolean;
+  createdAt: string;
+  user: {
+    email: string;
+    isBanned: boolean;
+    createdAt: string;
+  };
+  _count: {
+    jobs: number;
+    reviews: number;
+  };
+};
