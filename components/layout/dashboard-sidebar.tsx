@@ -1,8 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Briefcase, LogOut } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import {
+  Briefcase,
+  LogOut,
+  LayoutDashboard,
+  FileText,
+  Bookmark,
+  User,
+  Users,
+  BarChart3,
+  Settings,
+  Building2,
+  FolderKanban,
+  ClipboardList,
+  type LucideIcon,
+} from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -15,10 +29,23 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { TNavItem } from '@/lib/dashboard-nav';
+import { TNavItem, TIconName } from '@/lib/dashboard-nav';
 import { logoutUser } from '@/service/logout';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+
+const iconMap: Record<TIconName, LucideIcon> = {
+  LayoutDashboard,
+  FileText,
+  Bookmark,
+  User,
+  Briefcase,
+  Users,
+  BarChart3,
+  Settings,
+  Building2,
+  FolderKanban,
+  ClipboardList,
+};
 
 export function DashboardSidebar({ navItems }: { navItems: TNavItem[] }) {
   const pathname = usePathname();
@@ -51,7 +78,7 @@ export function DashboardSidebar({ navItems }: { navItems: TNavItem[] }) {
             <SidebarMenu>
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
-                const Icon = item.icon;
+                const Icon = iconMap[item.icon];
 
                 return (
                   <SidebarMenuItem key={item.href}>

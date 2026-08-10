@@ -4,9 +4,6 @@ import './globals.css';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { QueryProvider } from '@/components/providers/query-provider';
 import { Toaster } from '@/components/ui/sonner';
-import { getMe } from '@/service/getMe';
-import { Navbar } from '@/components/layout/navbar';
-import { Footer } from '@/components/layout/footer';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -25,11 +22,9 @@ export const metadata: Metadata = {
     'JobNest connects candidates with employers across Bangladesh — browse jobs, apply in minutes, and track every application in one place.',
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const user = await getMe();
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${fraunces.variable} ${inter.variable} font-body antialiased`}>
@@ -40,12 +35,8 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <QueryProvider>
-            <div className="flex min-h-screen flex-col">
-              <Navbar user={user} />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-            <Toaster richColors position="top-right" />
+            {children}
+            <Toaster richColors position="top-center" />
           </QueryProvider>
         </ThemeProvider>
       </body>
