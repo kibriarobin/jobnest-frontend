@@ -28,8 +28,8 @@ const candidateNav: TNavItem[] = [
 
 const employerNav: TNavItem[] = [
   { title: 'Overview', href: '/employer-dashboard', icon: 'LayoutDashboard' },
-  { title: 'Post a Job', href: '/employer-dashboard/jobs/create', icon: 'Briefcase' },
-  { title: 'Manage Jobs', href: '/employer-dashboard/jobs', icon: 'FolderKanban' },
+  { title: 'Post a Job', href: '/employer-dashboard/create-jobs', icon: 'Briefcase' },
+  { title: 'Manage Jobs', href: '/employer-dashboard/manage-jobs', icon: 'FolderKanban' },
   { title: 'Applicants', href: '/employer-dashboard/applicants', icon: 'ClipboardList' },
   { title: 'Analytics', href: '/employer-dashboard/analytics', icon: 'BarChart3' },
   { title: 'Company Settings', href: '/employer-dashboard/settings', icon: 'Settings' },
