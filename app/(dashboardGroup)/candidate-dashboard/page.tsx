@@ -33,7 +33,7 @@ export default async function CandidateOverviewPage() {
         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border py-16 text-center">
           <Briefcase className="size-8 text-muted-foreground" />
           <p className="mt-3 text-sm text-muted-foreground">
-            You haven&apos;t applied to any jobs yet — browse openings to get started.
+            You haven&apos;t applied to any jobs yet.
           </p>
         </div>
       )}
