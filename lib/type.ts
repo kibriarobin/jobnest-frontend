@@ -1,9 +1,9 @@
 // ---------- Role ----------
 
 export const Role = {
-  CANDIDATE: 'CANDIDATE',
-  EMPLOYER: 'EMPLOYER',
-  ADMIN: 'ADMIN',
+  CANDIDATE: "CANDIDATE",
+  EMPLOYER: "EMPLOYER",
+  ADMIN: "ADMIN",
 } as const;
 
 export type TRole = (typeof Role)[keyof typeof Role];
@@ -11,31 +11,32 @@ export type TRole = (typeof Role)[keyof typeof Role];
 // ---------- Job related enums ----------
 
 export const JobType = {
-  REMOTE: 'REMOTE',
-  ONSITE: 'ONSITE',
-  HYBRID: 'HYBRID',
+  REMOTE: "REMOTE",
+  ONSITE: "ONSITE",
+  HYBRID: "HYBRID",
 } as const;
 
 export type TJobType = (typeof JobType)[keyof typeof JobType];
 
 export const JobStatus = {
-  PENDING: 'PENDING',
-  APPROVED: 'APPROVED',
-  REJECTED: 'REJECTED',
-  CLOSED: 'CLOSED',
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED",
+  CLOSED: "CLOSED",
 } as const;
 
 export type TJobStatus = (typeof JobStatus)[keyof typeof JobStatus];
 
 export const ApplicationStatus = {
-  APPLIED: 'APPLIED',
-  SHORTLISTED: 'SHORTLISTED',
-  INTERVIEW: 'INTERVIEW',
-  HIRED: 'HIRED',
-  REJECTED: 'REJECTED',
+  APPLIED: "APPLIED",
+  SHORTLISTED: "SHORTLISTED",
+  INTERVIEW: "INTERVIEW",
+  HIRED: "HIRED",
+  REJECTED: "REJECTED",
 } as const;
 
-export type TApplicationStatus = (typeof ApplicationStatus)[keyof typeof ApplicationStatus];
+export type TApplicationStatus =
+  (typeof ApplicationStatus)[keyof typeof ApplicationStatus];
 
 // ---------- User / Profile ----------
 
@@ -119,5 +120,37 @@ export type ISavedJob = {
     salaryMin: number;
     salaryMax: number;
     company: { name: string };
+  };
+};
+
+export type IEmployerJob = {
+  id: string;
+  title: string;
+  location: string;
+  type: TJobType;
+  status: TJobStatus;
+  salaryMin: number;
+  salaryMax: number;
+  vacancy: number;
+  deadline: string;
+  createdAt: string;
+  category: { name: string };
+};
+
+export type IApplicantRow = {
+  id: string;
+  status: TApplicationStatus;
+  appliedAt: string;
+  resumeUrl: string;
+  coverLetter?: string | null;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    profilePhoto?: string | null;
+  };
+  job: {
+    id: string;
+    title: string;
   };
 };
