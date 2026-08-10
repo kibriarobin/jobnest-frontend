@@ -45,7 +45,7 @@ export default async function RootLayout({
               <main className="flex-1">{children}</main>
               <Footer />
             </div>
-            <Toaster richColors position="top-center" />
+            <Toaster richColors position="top-right" />
           </QueryProvider>
         </ThemeProvider>
       </body>
