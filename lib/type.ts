@@ -212,3 +212,28 @@ export type IAdminCompany = {
     reviews: number;
   };
 };
+
+export type IJobDetail = {
+  id: string;
+  title: string;
+  description: string;
+  requirements: string[];
+  location: string;
+  type: TJobType;
+  salaryMin: number;
+  salaryMax: number;
+  experienceLevel: string;
+  vacancy: number;
+  deadline: string;
+  status: TJobStatus;
+  createdAt: string;
+  company: {
+    id: string;
+    name: string;
+    logo?: string | null;
+    description?: string | null;
+    isVerified: boolean;
+  };
+  category: { id: string; name: string };
+  relatedJobs: IJob[];
+};

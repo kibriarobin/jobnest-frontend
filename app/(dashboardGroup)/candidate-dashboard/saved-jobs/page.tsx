@@ -1,18 +1,20 @@
-import Link from 'next/link';
-import { Bookmark, MapPin } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { serverFetch } from '@/lib/server-fetch';
-import { ISavedJob } from '@/lib/type';
-import { UnsaveButton } from './_components/unsave-button';
+import Link from "next/link";
+import { Bookmark, MapPin } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { serverFetch } from "@/lib/server-fetch";
+import { ISavedJob } from "@/lib/type";
+import { UnsaveButton } from "./_components/unsave-button";
 
 export default async function SavedJobsPage() {
-  const { result } = await serverFetch('/api/saved-jobs');
+  const { result } = await serverFetch("/api/saved-jobs");
   const savedJobs: ISavedJob[] = result.success ? result.data : [];
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-heading text-2xl font-semibold text-foreground">Saved Jobs</h1>
+        <h1 className="font-heading text-2xl font-semibold text-foreground">
+          Saved Jobs
+        </h1>
         <p className="text-sm text-muted-foreground">
           Jobs you&apos;ve bookmarked to apply to later.
         </p>
@@ -24,7 +26,10 @@ export default async function SavedJobsPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             You haven&apos;t saved any jobs yet.
           </p>
-          <Link href="/jobs" className="mt-3 text-sm font-medium text-primary hover:underline">
+          <Link
+            href="/jobs"
+            className="mt-3 text-sm font-medium text-primary hover:underline"
+          >
             Browse open positions
           </Link>
         </div>
@@ -45,8 +50,8 @@ export default async function SavedJobsPage() {
                     {saved.job.location}
                   </p>
                   <p className="mt-2 font-heading text-sm font-semibold text-primary">
-                    ৳{(saved.job.salaryMin / 1000).toFixed(0)}k - ৳
-                    {(saved.job.salaryMax / 1000).toFixed(0)}k
+                    {saved.job.salaryMin.toLocaleString("en-US")} -{" "}
+                    {saved.job.salaryMax.toLocaleString("en-US")}
                   </p>
                 </Link>
                 <UnsaveButton jobId={saved.job.id} />
