@@ -1,36 +1,45 @@
-'use client';
+"use client";
 
-import { useActionState } from 'react';
-import Link from 'next/link';
-import { Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { useActionState } from "react";
+import Link from "next/link";
+import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { loginAction, TLoginState } from '../_actions/login';
+} from "@/components/ui/card";
+import { loginAction, TLoginState } from "../_actions/login";
+import { GoogleLoginButton } from "./google-login-button";
 
 const initialState: TLoginState = { success: false };
 
 export function LoginForm() {
-  const [state, formAction, isPending] = useActionState(loginAction, initialState);
+  const [state, formAction, isPending] = useActionState(
+    loginAction,
+    initialState,
+  );
 
-  const handleDemoLogin = (role: 'candidate' | 'employer') => {
-    const form = document.getElementById('login-form') as HTMLFormElement;
-    const emailInput = form.elements.namedItem('email') as HTMLInputElement;
-    const passwordInput = form.elements.namedItem('password') as HTMLInputElement;
+  const handleDemoLogin = (role: "candidate" | "employer" | "admin") => {
+    const form = document.getElementById("login-form") as HTMLFormElement;
+    const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+    const passwordInput = form.elements.namedItem(
+      "password",
+    ) as HTMLInputElement;
 
-    if (role === 'candidate') {
-      emailInput.value = 'demo.candidate@jobnest.com';
-      passwordInput.value = 'demo1234';
+    if (role === "candidate") {
+      emailInput.value = "rifat@gmail.com";
+      passwordInput.value = "123456";
+    } else if (role === "employer") {
+      emailInput.value = "rahat@gmail.com";
+      passwordInput.value = "123456";
     } else {
-      emailInput.value = 'demo.employer@jobnest.com';
-      passwordInput.value = 'demo1234';
+      emailInput.value = "robin@gmail.com";
+      passwordInput.value = "123456";
     }
   };
 
@@ -59,7 +68,9 @@ export function LoginForm() {
               disabled={isPending}
             />
             {state.errors?.email && (
-              <p className="text-xs text-destructive">{state.errors.email[0]}</p>
+              <p className="text-xs text-destructive">
+                {state.errors.email[0]}
+              </p>
             )}
           </div>
 
@@ -74,7 +85,9 @@ export function LoginForm() {
               disabled={isPending}
             />
             {state.errors?.password && (
-              <p className="text-xs text-destructive">{state.errors.password[0]}</p>
+              <p className="text-xs text-destructive">
+                {state.errors.password[0]}
+              </p>
             )}
           </div>
 
@@ -85,16 +98,17 @@ export function LoginForm() {
                 Logging in...
               </>
             ) : (
-              'Log In'
+              "Log In"
             )}
           </Button>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             <Button
               type="button"
               variant="outline"
               size="sm"
-              onClick={() => handleDemoLogin('candidate')}
+              className="text-xs"
+              onClick={() => handleDemoLogin("candidate")}
               disabled={isPending}
             >
               Demo Candidate
@@ -103,17 +117,44 @@ export function LoginForm() {
               type="button"
               variant="outline"
               size="sm"
-              onClick={() => handleDemoLogin('employer')}
+              className="text-xs"
+              onClick={() => handleDemoLogin("employer")}
               disabled={isPending}
             >
               Demo Employer
             </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="text-xs"
+              onClick={() => handleDemoLogin("admin")}
+              disabled={isPending}
+            >
+              Demo Admin
+            </Button>
           </div>
         </form>
 
+        <div className="relative my-4">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-border" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-card px-2 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
+        </div>
+
+        <GoogleLoginButton />
+
         <p className="mt-6 text-center text-sm text-muted-foreground">
-          Don&apos;t have an account?{' '}
-          <Link href="/register" className="font-medium text-primary hover:underline">
+          Don&apos;t have an account?{" "}
+          <Link
+            href="/register"
+            className="font-medium text-primary hover:underline"
+          >
             Sign up
           </Link>
         </p>
