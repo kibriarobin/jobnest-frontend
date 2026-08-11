@@ -237,3 +237,13 @@ export type IJobDetail = {
   category: { id: string; name: string };
   relatedJobs: IJob[];
 };
+
+export type IPublicCompany = {
+  id: string;
+  name: string;
+  logo?: string | null;
+  description?: string | null;
+  website?: string | null;
+  isVerified: boolean;
+  _count: { jobs: number };
+};
