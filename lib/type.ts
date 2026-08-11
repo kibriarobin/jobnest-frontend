@@ -247,3 +247,26 @@ export type IPublicCompany = {
   isVerified: boolean;
   _count: { jobs: number };
 };
+
+export type ICompanyDetail = {
+  id: string;
+  name: string;
+  logo?: string | null;
+  description?: string | null;
+  website?: string | null;
+  isVerified: boolean;
+  createdAt: string;
+  jobs: {
+    id: string;
+    title: string;
+    status: TJobStatus;
+    createdAt: string;
+  }[];
+  reviews: {
+    id: string;
+    rating: number;
+    comment?: string | null;
+    createdAt: string;
+  }[];
+  _count: { jobs: number; reviews: number };
+};
