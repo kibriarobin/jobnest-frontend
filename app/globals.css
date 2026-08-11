@@ -48,6 +48,8 @@
   --radius-4xl: calc(var(--radius) * 2.6);
    --color-footer-bg: var(--footer-bg);
   --color-footer-foreground: var(--footer-foreground);
+  --color-brand-section-bg: var(--brand-section-bg);
+--color-brand-section-foreground: var(--brand-section-foreground);
 }
 
 :root {
@@ -85,6 +87,8 @@
   --sidebar-ring: oklch(0.76 0.13 80);
    --footer-bg: oklch(0.28 0.045 240);
   --footer-foreground: oklch(0.98 0.005 240);
+  --brand-section-bg: oklch(0.28 0.045 240);
+--brand-section-foreground: oklch(0.98 0.005 240);
 }
 
 .dark {
@@ -121,6 +125,8 @@
   --sidebar-ring: oklch(0.76 0.13 80);
    --footer-bg: oklch(0.28 0.045 240);
   --footer-foreground: oklch(0.98 0.005 240);
+  --brand-section-bg: oklch(0.28 0.045 240);
+--brand-section-foreground: oklch(0.98 0.005 240);
 }
 
 @layer base {

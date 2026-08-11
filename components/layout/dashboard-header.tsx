@@ -22,7 +22,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ThemeToggle } from '@/components/theme';
 import { User, LogOut } from 'lucide-react';
-import { IUser } from '@/lib/type';
+import { IUser, Role } from '@/lib/type';
 import { logoutUser } from '@/service/logout';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
@@ -41,6 +41,16 @@ function getPageTitle(pathname: string) {
     .join(' ');
 }
 
+function getProfileHref(role: string) {
+  if (role === Role.CANDIDATE) {
+    return '/candidate-dashboard/profile';
+  } else if (role === Role.EMPLOYER) {
+    return '/employer-dashboard/settings';
+  } else {
+    return '/admin-dashboard/settings';
+  }
+}
+
 export function DashboardHeader({ user }: { user: IUser }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -53,7 +63,7 @@ export function DashboardHeader({ user }: { user: IUser }) {
     router.refresh();
   };
 
-  const profileHref = `/${user.role.toLowerCase()}-dashboard/profile`;
+  const profileHref = getProfileHref(user.role);
 
   return (
     <header className="flex h-16 shrink-0 items-center justify-between border-b border-border px-4">
