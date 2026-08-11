@@ -1,9 +1,9 @@
 import { Users, Briefcase, Building2, Clock } from 'lucide-react';
 import { StatCard } from '@/components/shared/stat-card';
 import { getAdminOverview } from '@/service/getAnalytics';
-import { StatusPieChart } from '../candidate-dashboard/_components/status-pie-chart';
 import { CategoryBarChart } from './_components/category-bar-chart';
 import { UserGrowthLineChart } from './_components/user-growth-line-chart';
+import { StatusPieChart } from '@/components/shared/status-pie-chart';
 
 export default async function AdminOverviewPage() {
   const data = await getAdminOverview();

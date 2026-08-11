@@ -17,7 +17,7 @@ export function StatusPieChart({ data }: { data: TStatusData[] }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">Applications by Status</CardTitle>
+        <CardTitle className="text-base">Status Breakdown</CardTitle>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={280}>

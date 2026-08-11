@@ -1,7 +1,7 @@
 import { FileText, Bookmark, CalendarCheck, Briefcase } from 'lucide-react';
 import { StatCard } from '@/components/shared/stat-card';
 import { getCandidateOverview } from '@/service/getAnalytics';
-import { StatusPieChart } from './_components/status-pie-chart';
+import { StatusPieChart } from '@/components/shared/status-pie-chart';
 
 export default async function CandidateOverviewPage() {
   const data = await getCandidateOverview();
