@@ -31,7 +31,7 @@ export function JobStatusActions({
   if (currentStatus !== 'PENDING') {
     return (
       <span className="text-xs text-muted-foreground">
-        {isPending ? <Loader2 className="size-4 animate-spin" /> : '—'}
+        {isPending ? <Loader2 className="size-4 animate-spin" /> : '-'}
       </span>
     );
   }

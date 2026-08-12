@@ -23,7 +23,7 @@ const candidateNav: TNavItem[] = [
   { title: 'Overview', href: '/candidate-dashboard', icon: 'LayoutDashboard' },
   { title: 'My Applications', href: '/candidate-dashboard/applications', icon: 'FileText' },
   { title: 'Saved Jobs', href: '/candidate-dashboard/saved-jobs', icon: 'Bookmark' },
-  { title: 'Profile', href: '/candidate-dashboard/profile', icon: 'User' },
+  { title: 'Profile Settings', href: '/candidate-dashboard/profile', icon: 'User' },
 ];
 
 const employerNav: TNavItem[] = [
@@ -41,7 +41,7 @@ const adminNav: TNavItem[] = [
   { title: 'Manage Jobs', href: '/admin-dashboard/manage-jobs', icon: 'FolderKanban' },
   { title: 'Manage Companies', href: '/admin-dashboard/manage-companies', icon: 'Building2' },
   { title: 'Analytics', href: '/admin-dashboard/analytics', icon: 'BarChart3' },
-  { title: 'Settings', href: '/admin-dashboard/settings', icon: 'Settings' },
+  { title: 'Profile Settings', href: '/admin-dashboard/settings', icon: 'Settings' },
 ];
 
 export function getNavItemsByRole(role: TRole): TNavItem[] {

@@ -30,7 +30,7 @@ export default function AboutPage() {
           About JobNest
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          JobNest is a job portal built to make hiring feel less like paperwork — for candidates
+          JobNest is a job portal built to make hiring feel less like paperwork - for candidates
           searching for their next role, and for employers trying to find the right person
           without wading through noise.
         </p>
@@ -58,7 +58,7 @@ export default function AboutPage() {
         <p>
           JobNest began as a response to a simple frustration: job platforms had become bloated,
           cluttered with irrelevant listings and slow application flows. We set out to build
-          something leaner — a platform where every job post is reviewed before it goes live, and
+          something leaner - a platform where every job post is reviewed before it goes live, and
           every application status update reaches the candidate in real time.
         </p>
         <p>

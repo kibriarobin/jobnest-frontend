@@ -153,7 +153,7 @@ export function Navbar({ user }: { user: IUser | null }) {
           onClick={() => setOpen(false)}
           className="rounded-md px-3 py-2.5 text-sm font-medium text-foreground hover:bg-muted"
         >
-          Blog
+          Contact
         </Link>
         <Link
           href={profileHref}
@@ -202,7 +202,7 @@ export function Navbar({ user }: { user: IUser | null }) {
           href="/blog"
           className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
-          Blog
+          Contact
         </Link>
       </>
     );

@@ -37,9 +37,6 @@ export function LoginForm() {
     } else if (role === "employer") {
       emailInput.value = "rahat@gmail.com";
       passwordInput.value = "123456";
-    } else {
-      emailInput.value = "robin@gmail.com";
-      passwordInput.value = "123456";
     }
   };
 
@@ -123,16 +120,7 @@ export function LoginForm() {
             >
               Demo Employer
             </Button>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="text-xs"
-              onClick={() => handleDemoLogin("admin")}
-              disabled={isPending}
-            >
-              Demo Admin
-            </Button>
+
           </div>
         </form>
 

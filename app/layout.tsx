@@ -17,9 +17,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'JobNest — Find Your Next Role',
+  title: 'JobNest - Find Your Next Role',
   description:
-    'JobNest connects candidates with employers across Bangladesh — browse jobs, apply in minutes, and track every application in one place.',
+    'JobNest connects candidates with employers across Bangladesh - browse jobs, apply in minutes, and track every application in one place.',
 };
 
 export default function RootLayout({
