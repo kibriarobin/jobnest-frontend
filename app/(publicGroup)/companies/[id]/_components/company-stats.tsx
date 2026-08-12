@@ -21,7 +21,7 @@ export function CompanyStats({
     {
       icon: Star,
       label: 'Average Rating',
-      value: avgRating ? `${avgRating} / 5` : '—',
+      value: avgRating ? `${avgRating} / 5` : '-',
     },
     {
       icon: MessageSquare,
