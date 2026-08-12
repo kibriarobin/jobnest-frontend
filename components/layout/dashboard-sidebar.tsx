@@ -32,6 +32,7 @@ import {
 import { TNavItem, TIconName } from '@/lib/dashboard-nav';
 import { logoutUser } from '@/service/logout';
 import { toast } from 'sonner';
+import { Layers } from 'lucide-react';
 
 const iconMap: Record<TIconName, LucideIcon> = {
   LayoutDashboard,
@@ -45,6 +46,7 @@ const iconMap: Record<TIconName, LucideIcon> = {
   Building2,
   FolderKanban,
   ClipboardList,
+  Layers,
 };
 
 export function DashboardSidebar({ navItems }: { navItems: TNavItem[] }) {

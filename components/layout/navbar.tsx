@@ -1,57 +1,57 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { Menu, LayoutDashboard, User, LogOut, Briefcase } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Menu, LayoutDashboard, User, LogOut, Briefcase } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
   SheetTitle,
   SheetHeader,
-} from '@/components/ui/sheet';
+} from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ThemeToggle } from '@/components/theme';
-import { PipelineDivider } from './pipeline-divider';
-import { Role, IUser } from '@/lib/type';
-import { logoutUser } from '@/service/logout';
-import { toast } from 'sonner';
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ThemeToggle } from "@/components/theme";
+import { PipelineDivider } from "./pipeline-divider";
+import { Role, IUser } from "@/lib/type";
+import { logoutUser } from "@/service/logout";
+import { toast } from "sonner";
 
 const publicLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/jobs', label: 'Find Jobs' },
-  { href: '/companies', label: 'Companies' },
-  { href: '/about', label: 'About' },
+  { href: "/", label: "Home" },
+  { href: "/jobs", label: "Find Jobs" },
+  { href: "/companies", label: "Companies" },
+  { href: "/about", label: "About" },
 ];
 
-function getDashboardPath(role: IUser['role'] | undefined) {
+function getDashboardPath(role: IUser["role"] | undefined) {
   if (role === Role.CANDIDATE) {
-    return '/candidate-dashboard';
+    return "/candidate-dashboard";
   } else if (role === Role.EMPLOYER) {
-    return '/employer-dashboard';
+    return "/employer-dashboard";
   } else if (role === Role.ADMIN) {
-    return '/admin-dashboard';
+    return "/admin-dashboard";
   } else {
-    return '/';
+    return "/";
   }
 }
 
-function getProfileHref(role: IUser['role'] | undefined) {
+function getProfileHref(role: IUser["role"] | undefined) {
   if (role === Role.CANDIDATE) {
-    return '/candidate-dashboard/profile';
+    return "/candidate-dashboard/profile";
   } else if (role === Role.EMPLOYER) {
-    return '/employer-dashboard/settings';
+    return "/employer-dashboard/settings";
   } else {
-    return '/admin-dashboard/settings';
+    return "/admin-dashboard/settings";
   }
 }
 
@@ -61,20 +61,20 @@ export function Navbar({ user }: { user: IUser | null }) {
 
   const handleLogout = async () => {
     await logoutUser();
-    toast.success('Logged out successfully');
+    toast.success("Logged out successfully");
     setOpen(false);
-    router.push('/');
+    router.push("/");
     router.refresh();
   };
 
-  let dashboardPath = '/';
-  let profileHref = '/';
+  let dashboardPath = "/";
+  let profileHref = "/";
   if (user) {
     dashboardPath = getDashboardPath(user.role);
     profileHref = getProfileHref(user.role);
   }
 
-  let avatarInitial = '';
+  let avatarInitial = "";
   if (user) {
     avatarInitial = user.name.charAt(0).toUpperCase();
   }
@@ -87,7 +87,10 @@ export function Navbar({ user }: { user: IUser | null }) {
         <DropdownMenuTrigger asChild>
           <button className="ml-1 flex items-center gap-2 rounded-full outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring">
             <Avatar className="size-9">
-              <AvatarImage src={user.profilePhoto ?? undefined} alt={user.name} />
+              <AvatarImage
+                src={user.profilePhoto ?? undefined}
+                alt={user.name}
+              />
               <AvatarFallback className="bg-secondary text-secondary-foreground">
                 {avatarInitial}
               </AvatarFallback>
@@ -140,16 +143,9 @@ export function Navbar({ user }: { user: IUser | null }) {
 
   if (user) {
     mobileAuthContent = (
-      <>
+      <> 
         <Link
-          href={dashboardPath}
-          onClick={() => setOpen(false)}
-          className="rounded-md px-3 py-2.5 text-sm font-medium text-foreground hover:bg-muted"
-        >
-          Dashboard
-        </Link>
-        <Link
-          href="/blog"
+          href="/contact"
           onClick={() => setOpen(false)}
           className="rounded-md px-3 py-2.5 text-sm font-medium text-foreground hover:bg-muted"
         >
@@ -161,6 +157,13 @@ export function Navbar({ user }: { user: IUser | null }) {
           className="rounded-md px-3 py-2.5 text-sm font-medium text-foreground hover:bg-muted"
         >
           Profile
+        </Link>
+        <Link
+          href={dashboardPath}
+          onClick={() => setOpen(false)}
+          className="rounded-md px-3 py-2.5 text-sm font-medium text-foreground hover:bg-muted"
+        >
+          Dashboard
         </Link>
         <button
           onClick={handleLogout}
@@ -193,16 +196,16 @@ export function Navbar({ user }: { user: IUser | null }) {
     loggedInDesktopLinks = (
       <>
         <Link
+          href="/contact"
+          className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          Contact
+        </Link>
+        <Link
           href={dashboardPath}
           className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
           Dashboard
-        </Link>
-        <Link
-          href="/blog"
-          className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-        >
-          Contact
         </Link>
       </>
     );

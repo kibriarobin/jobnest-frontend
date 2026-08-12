@@ -10,6 +10,7 @@ export type TIconName =
   | 'BarChart3'
   | 'Settings'
   | 'Building2'
+  | 'Layers'
   | 'FolderKanban'
   | 'ClipboardList';
 
@@ -39,6 +40,7 @@ const adminNav: TNavItem[] = [
   { title: 'Overview', href: '/admin-dashboard', icon: 'LayoutDashboard' },
   { title: 'Manage Users', href: '/admin-dashboard/manage-users', icon: 'Users' },
   { title: 'Manage Jobs', href: '/admin-dashboard/manage-jobs', icon: 'FolderKanban' },
+  { title: 'Manage Categories', href: '/admin-dashboard/categories', icon: 'Layers' },
   { title: 'Manage Companies', href: '/admin-dashboard/manage-companies', icon: 'Building2' },
   { title: 'Analytics', href: '/admin-dashboard/analytics', icon: 'BarChart3' },
   { title: 'Profile Settings', href: '/admin-dashboard/settings', icon: 'Settings' },

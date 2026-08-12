@@ -270,3 +270,10 @@ export type ICompanyDetail = {
   }[];
   _count: { jobs: number; reviews: number };
 };
+
+export type IAdminCategory = {
+  id: string;
+  name: string;
+  icon?: string | null;
+  _count: { jobs: number };
+};
