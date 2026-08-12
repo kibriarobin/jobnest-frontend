@@ -75,5 +75,5 @@ export async function createJobAction(
     return { success: false, message: result.message || 'Failed to create job' };
   }
 
-  redirect('/employer-dashboard/jobs');
+  redirect('/employer-dashboard/manage-jobs');
 }
