@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JobNest — Frontend
 
-## Getting Started
+JobNest is a full-featured job portal platform connecting candidates with employers across Bangladesh. This repository contains the **frontend web application**, built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, and shadcn/ui.
 
-First, run the development server:
+🔗 **Live Website:** https://jobnest-frontend-three.vercel.app
+🔗 **Backend Repository:** [jobnest-backend](https://github.com/kibriarobin/jobnest-backend)
+🔗 **Backend API:** https://jobnest-backend-kappa.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## ✨ Features
+
+- **Public Job Board** — browse, search, filter (category, location, type), sort, and paginate job listings
+- **Job Details** — full job description, requirements, company info, and related jobs
+- **Company Directory** — browse verified companies, view their open positions and reviews
+- **Role-based Dashboards** — separate dashboards for Candidate, Employer, and Admin with sidebar navigation and role-aware routing
+  - **Candidate:** overview stats, applications tracker, saved jobs, editable profile, post-interview company reviews
+  - **Employer:** overview analytics, job posting/editing, applicant pipeline management, company settings
+  - **Admin:** platform-wide analytics, user/job/company/category moderation
+- **Authentication** — email/password auth with JWT (httpOnly cookies), silent token refresh, and Google OAuth (candidate-only)
+- **Dark / Light Mode** — full theme support via `next-themes`
+- **Dashboard Analytics** — real-time charts (bar, line, pie) built with Recharts, powered by backend aggregation
+- **Contact Form** — client-side email delivery via EmailJS
+- **Responsive Design** — fully responsive across mobile, tablet, and desktop
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| UI Components | shadcn/ui |
+| Forms | React Server Actions + `useActionState` |
+| Validation | Zod |
+| Charts | Recharts |
+| Auth Middleware | Custom `proxy.ts` (JWT verification via `jose`) |
+| Email | EmailJS |
+| Icons | Lucide React |
+| Deployment | Vercel |
+
+---
+
+## 📁 Project Structure
+
+```
+app/
+├── (authGroup)/              # Login, Register
+│   ├── login/
+│   └── register/
+├── (dashboardGroup)/         # Role-based dashboards
+│   ├── candidate-dashboard/
+│   ├── employer-dashboard/
+│   └── admin-dashboard/
+├── (publicGroup)/            # Public-facing pages
+│   ├── page.tsx                # Home
+│   ├── jobs/                    # Listing + details
+│   ├── companies/               # Directory + details
+│   ├── about/, contact/
+├── api/
+│   └── googleAuth/            # Google OAuth callback handler
+├── layout.tsx
+└── globals.css
+
+components/
+├── layout/                    # Navbar, Footer, Dashboard Sidebar/Header
+├── providers/                 # Theme, React Query providers
+├── shared/                    # Reusable cards, charts, badges
+└── ui/                        # shadcn/ui primitives
+
+lib/
+├── type.ts                    # Centralized TypeScript types
+├── dashboard-nav.ts             # Role-based sidebar navigation config
+└── server-fetch.ts              # Authenticated fetch helper
+
+service/                       # Server-side data fetching functions
+utils/                         # JWT verification helper
+proxy.ts                       # Root middleware (auth + role-based routing)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
+- Node.js 18+
+- pnpm
+- A running instance of the [JobNest backend](https://github.com/kibriarobin/jobnest-backend)
 
-## Learn More
+### Installation
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+git clone https://github.com/kibriarobin/jobnest-frontend.git
+cd jobnest-frontend
+pnpm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create a `.env.local` file in the root directory:
 
-## Deploy on Vercel
+```env
+BACKEND_API_URL=http://localhost:5000
+NEXT_PUBLIC_BACKEND_API_URL=http://localhost:5000
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+JWT_ACCESS_SECRET="same as backend"
+JWT_REFRESH_SECRET="same as backend"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+NEXT_PUBLIC_EMAILJS_SERVICE_ID="your-emailjs-service-id"
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID="your-emailjs-template-id"
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY="your-emailjs-public-key"
+```
+
+⚠️ `JWT_ACCESS_SECRET` and `JWT_REFRESH_SECRET` must exactly match the backend's values, since the middleware (`proxy.ts`) verifies tokens locally without calling the backend.
+
+### Run the Development Server
+
+```bash
+pnpm dev
+```
+
+The app will be available at `http://localhost:3000`.
+
+---
+
+## 🔐 Demo Credentials
+
+| Role | Email | Password |
+|---|---|---|
+| Candidate | demo.candidate@jobnest.com | demo1234 |
+| Employer | demo.employer@jobnest.com | demo1234 |
+| Admin | demo.admin@jobnest.com | demo1234 |
+
+---
+
+## 🏗️ Architecture Notes
+
+- **Route Groups** — `(authGroup)`, `(dashboardGroup)`, and `(publicGroup)` separate layouts without affecting URL structure
+- **Server Actions over API routes** — most mutations (job creation, profile updates, applications) use Next.js Server Actions calling the backend directly, keeping secrets server-side
+- **Role-aware Middleware** — `proxy.ts` verifies JWTs at the edge, silently refreshes expired access tokens, and redirects users based on role and route
+- **Centralized Types** — all shared TypeScript types live in `lib/type.ts` as the single source of truth across the app
+- **Cross-domain Auth** — since the frontend and backend are deployed on separate Vercel domains, Google OAuth tokens are passed via a signed redirect and set as cookies from within the frontend's own domain (`app/api/googleAuth/route.ts`)
+
+---
+
+## 👤 Author
+
+**Golam Kibria Robin**
+[GitHub](https://github.com/kibriarobin) · [LinkedIn](https://linkedin.com/in/golam-kibria97)
+
+Built as part of the Programming Hero "Next Level Web Development" — AI-Driven Software Engineering Bootcamp.
