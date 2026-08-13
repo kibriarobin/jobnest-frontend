@@ -3,7 +3,9 @@
 JobNest is a full-featured job portal platform connecting candidates with employers across Bangladesh. This repository contains the **frontend web application**, built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, and shadcn/ui.
 
 🔗 **Live Website:** https://jobnest-frontend-three.vercel.app
+
 🔗 **Backend Repository:** [jobnest-backend](https://github.com/kibriarobin/jobnest-backend)
+
 🔗 **Backend API:** https://jobnest-backend-kappa.vercel.app
 
 ---
