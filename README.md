@@ -127,16 +127,6 @@ The app will be available at `http://localhost:3000`.
 
 ---
 
-## 🔐 Demo Credentials
-
-| Role | Email | Password |
-|---|---|---|
-| Candidate | demo.candidate@jobnest.com | demo1234 |
-| Employer | demo.employer@jobnest.com | demo1234 |
-| Admin | demo.admin@jobnest.com | demo1234 |
-
----
-
 ## 🏗️ Architecture Notes
 
 - **Route Groups** — `(authGroup)`, `(dashboardGroup)`, and `(publicGroup)` separate layouts without affecting URL structure
